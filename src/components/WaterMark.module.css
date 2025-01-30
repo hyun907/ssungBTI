@@ -1,0 +1,13 @@
+.mark {
+  display: flex;
+  width: 20rem;
+  height: 4rem;
+  flex-direction: column;
+  justify-content: center;
+  color: #64a5bb;
+  text-align: center;
+  font-family: "SBAggroL";
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+}

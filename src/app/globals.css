@@ -1,24 +1,48 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: "NanumSquareAcR";
+  src: url("/fonts/NanumSquareAcR.woff2") format("woff2-variations");
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: "NanumSquareAcB";
+  src: url("/fonts/NanumSquareAcB.woff2") format("woff2-variations");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SBAggroB";
+  src: url("/fonts/SBAggroB.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SBAggroM";
+  src: url("/fonts/SBAggroM.woff") format("woff");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SBAggroL";
+  src: url("/fonts/SBAggroL.woff") format("woff");
+  font-style: normal;
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  font-size: 62.5%;
+}
+
+@media screen and (max-width: 370px) {
+  html {
+    font-size: 58%; /* 9.28px에 해당 */
+  }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

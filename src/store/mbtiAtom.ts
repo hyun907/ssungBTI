@@ -7,22 +7,27 @@ export const localStorageEffect =
     if (typeof window === "undefined") return;
 
     const savedValue = localStorage.getItem(key);
-    if (savedValue != null) {
+
+    if (savedValue != null && savedValue !== "undefined") {
+      // ✅ "undefined" 문자열 방지
       try {
-        setSelf(JSON.parse(savedValue)); //  JSON 객체라면 parse
+        const parsedValue = JSON.parse(savedValue);
+        setSelf(parsedValue);
       } catch {
-        setSelf(savedValue); // 단순 문자열이라면 그대로 저장
+        setSelf(savedValue); // JSON이 아니면 그냥 문자열로 저장
       }
+    } else {
+      setSelf("슝슝이"); // ✅ 저장된 값이 없거나 "undefined"면 기본값 설정
     }
 
     onSet(({ newValue, _, isReset }: any) => {
       if (isReset) {
         localStorage.removeItem(key);
       } else {
-        if (typeof newValue === "string") {
-          localStorage.setItem(key, newValue);
-        } else {
-          localStorage.setItem(key, JSON.stringify(newValue));
+        try {
+          localStorage.setItem(key, JSON.stringify(newValue)); // ✅ JSON 저장
+        } catch {
+          localStorage.setItem(key, newValue as string); // ✅ 문자열이면 그대로 저장
         }
       }
     });
@@ -55,6 +60,6 @@ export const MBTIState = atom<string>({
 
 export const NameState = atom({
   key: "NameState",
-  default: "",
+  default: "슝슝이",
   effects: [localStorageEffect("NameState")]
 });

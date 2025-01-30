@@ -1,4 +1,4 @@
-import TestPageClient from "../../components/test/TestPageClient";
+import TestPageClient from "@/components/test/TestPageClient";
 
 const TestPage = () => {
   return (
