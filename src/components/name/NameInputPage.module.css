@@ -125,6 +125,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  font-family: NanumSquareAcR;
 }
 
 .inputField {
@@ -138,7 +139,7 @@
   border-radius: 20px;
   border: 1px solid #131313;
   background-color: transparent;
-  font-family: NanumSquareAcL;
+  font-family: NanumSquareAcR;
 
   text-align: center;
   font-size: 2rem;

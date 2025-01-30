@@ -18,7 +18,9 @@ const NameInputPage = () => {
   }, [name]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
+    const newName = e.target.value;
+    setName(newName);
+    localStorage.setItem("NameState", newName); // ✅ 입력 즉시 localStorage에 저장
   };
 
   const handleStartTest = () => {
@@ -34,7 +36,6 @@ const NameInputPage = () => {
       <div className={styles.bgImage2}>
         <Image src="/images/pressu-logo.png" alt="배경 사진" width={268} height={288.13} />
       </div>
-
       <div className={styles.pageContainer}>
         <div className={styles.page}>
           <div className={styles.glassContainer}>
@@ -55,22 +56,6 @@ const NameInputPage = () => {
 
           <div className={styles.inputWrapper}>
             <div className={styles.subTitle}>내 이름 작성 뒤 나만의 슝슝이를 만나보슝~</div>
-            <div className={styles.iconContainer}>
-              <Image
-                src={"/images/leftArrow.png"}
-                alt={"화살표"}
-                width={68}
-                height={58}
-                quality={100}
-              />
-              <Image
-                src={"/images/rightArrow.png"}
-                alt={"화살표"}
-                width={61}
-                height={58}
-                quality={100}
-              />
-            </div>
             <input
               type="text"
               value={name}

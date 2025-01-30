@@ -5,7 +5,9 @@ import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { EIState, SNState, TFState, JPState, MBTIState, NameState } from "@/store/mbtiAtom";
 import { mbtiQuestions } from "@/constants/test/mbtiQuestions";
-import styles from "./ProgressBar.module.css";
+import styles from "./TestPageClient.module.css";
+import Back_IC from "@/../public/svg/backArrow.svg";
+import Image from "next/image";
 
 const TestPageClient = () => {
   const router = useRouter();
@@ -15,19 +17,10 @@ const TestPageClient = () => {
   const [TF, setTF] = useRecoilState(TFState);
   const [JP, setJP] = useRecoilState(JPState);
   const [MBTI, setMBTI] = useRecoilState(MBTIState);
-  const [userName, setUserName] = useRecoilState(NameState);
+  const [userName] = useRecoilState(NameState);
 
   const [history, setHistory] = useState<number[]>([]);
-  const [inputName, setInputName] = useState("");
-
   const progress = (count / 12) * 100;
-
-  const handleStart = () => {
-    if (inputName.trim()) {
-      setUserName(inputName);
-      localStorage.setItem("NameState", inputName);
-    }
-  };
 
   // MBTI 계산
   const calculateMBTI = () => {
@@ -38,7 +31,6 @@ const TestPageClient = () => {
     result += JP > 0 ? "J" : "P";
 
     setMBTI(result);
-    localStorage.setItem("MBTIState", result);
     router.push("/result");
   };
 
@@ -70,32 +62,46 @@ const TestPageClient = () => {
   };
 
   return (
-    <div>
-      {!userName ? (
-        <div>
-          <h2>이름을 입력하세요</h2>
-          <input type="text" value={inputName} onChange={e => setInputName(e.target.value)} />
-          <button onClick={handleStart}>테스트 시작</button>
-        </div>
-      ) : (
-        <div>
-          <h2>MBTI 테스트</h2>
-
-          <div className={styles.progressContainer}>
-            <div className={styles.progressBar} style={{ width: `${progress}%` }} />
+    <>
+      <div className={styles.bgImage1}>
+        <Image src="/images/pressu-logo.png" alt="배경 사진" width={268} height={288.13} />
+      </div>
+      <div className={styles.container}>
+        <div className={styles.mobileContainer}>
+          <div className={styles.backBtnWrapper}>
+            <button className={styles.backBtn} onClick={goBack} disabled={count === 1}>
+              <Back_IC /> 이전 질문
+            </button>
           </div>
 
-          <h3>
-            Q{count}. {mbtiQuestions[count].ques}
-          </h3>
-          <button onClick={goBack} disabled={count === 1}>
-            ← 뒤로가기
-          </button>
-          <button onClick={() => selectAnswer(1)}>{mbtiQuestions[count].ans1}</button>
-          <button onClick={() => selectAnswer(2)}>{mbtiQuestions[count].ans2}</button>
+          <div className={styles.progressWrapper}>
+            <Image
+              className={styles.progressIcon}
+              src={"/images/running-syung.png"}
+              width={50}
+              height={61}
+              alt={"슝슝이 프로그레스바"}
+              style={{ left: `calc(${progress}% - 28px)` }} // ✅ 프로그레스 바 진행에 맞춰 이동
+            />
+
+            <div className={styles.progressContainer}>
+              <div className={styles.progressBar} style={{ width: `${progress}%` }} />
+            </div>
+          </div>
+          <div className={styles.qMark}>Q</div>
+          <h3 className={styles.question}>{mbtiQuestions[count]?.ques}</h3>
+
+          <div className={styles.choiceContainer}>
+            <button className={styles.choiceButton} onClick={() => selectAnswer(1)}>
+              {mbtiQuestions[count]?.ans1}
+            </button>
+            <button className={styles.choiceButton} onClick={() => selectAnswer(2)}>
+              {mbtiQuestions[count]?.ans2}
+            </button>
+          </div>
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 

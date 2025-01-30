@@ -11,7 +11,6 @@ const ResultPageClient = () => {
   const [userName, setUserName] = useRecoilState(NameState);
   const router = useRouter();
 
-  // 새로고침해도 상태 유지 (localStorage 활용)
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedMBTI = localStorage.getItem("MBTIState");
@@ -22,7 +21,6 @@ const ResultPageClient = () => {
     }
   }, [setMBTI, setUserName]);
 
-  // 로딩 중 처리
   if (!MBTI) return <div>로딩 중...</div>;
 
   return (
