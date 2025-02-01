@@ -5,37 +5,113 @@ import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { MBTIState, NameState } from "@/store/mbtiAtom";
 import { compatibilityData } from "@/constants/result/compatibilityData";
+import Image from "next/image";
+import Link_IC from "@/../public/svg/link.svg";
+import { Toaster, toast } from "react-hot-toast";
+import styles from "./ResultPageClient.module.css";
 
 const ResultPageClient = () => {
   const [MBTI, setMBTI] = useRecoilState(MBTIState);
   const [userName, setUserName] = useRecoilState(NameState);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedMBTI = localStorage.getItem("MBTIState");
-      if (savedMBTI) setMBTI(savedMBTI);
+      if (savedMBTI) {
+        setMBTI(savedMBTI);
+      }
 
       const storedName = localStorage.getItem("NameState");
-      if (storedName) setUserName(storedName);
+      if (storedName) {
+        setUserName(storedName);
+      }
     }
-  }, [setMBTI, setUserName]);
 
-  if (!MBTI) return <div>로딩 중...</div>;
+    if (MBTI) {
+      setIsLoading(false);
+    }
+  }, [MBTI, setMBTI, setUserName]);
+
+  if (isLoading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.spinner}></div>
+        <p>로딩 중...</p>
+      </div>
+    );
+  }
+
+  const mbtiImagePath = `/images/mbti/${MBTI}.png`;
+  const compatibleImagePath = `/images/mbtiAssets/${compatibilityData[MBTI]?.compatible || ""}.png`;
+  const incompatibleImagePath = `/images/mbtiAssets/${compatibilityData[MBTI]?.incompatible || ""}.png`;
+
+  const handleCopyLink = () => {
+    const baseUrl = window.location.origin;
+    navigator.clipboard.writeText(baseUrl);
+    toast.success("링크 복사가 되었습니다!", {
+      style: {
+        borderRadius: "12px",
+        background: "#ffffff",
+        color: "#000",
+        padding: "12px 20px",
+        fontSize: "1.6rem",
+        fontWeight: "bold",
+        fontFamily: "NanumSquareAcB",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.15)"
+      }
+    });
+  };
 
   return (
-    <div>
-      <h1>테스트 결과</h1>
-      <h2>{userName}님의 MBTI는?</h2>
-      <h3>{MBTI}</h3>
-      <div>
-        <div>잘 맞는 슝슝이: {compatibilityData[MBTI]?.compatible || "정보 없음"}</div>
-        <div>안 맞는 슝슝이: {compatibilityData[MBTI]?.incompatible || "정보 없음"}</div>
+    <div className={styles.container}>
+      <Toaster position="top-center" reverseOrder={false} />
+
+      <h2 className={styles.resultTitle}>{userName}의 슝슝이는...</h2>
+      <Image
+        src={mbtiImagePath}
+        width={393}
+        height={821}
+        alt={`${MBTI} 이미지`}
+        quality={100}
+        className={styles.mbtiImage}
+      />
+      <div className={styles.caption}>▲ 이미지 꾹 눌러서 저장하기</div>
+      <div className={styles.compatibilityContainer}>
+        <div className={styles.compatibilityBox}>
+          <div>잘 맞는 슝슝이</div>
+          <Image
+            src={compatibleImagePath}
+            alt="잘 맞는 슝슝이"
+            width={119}
+            height={185}
+            quality={100}
+          />
+          <div>{compatibilityData[MBTI]?.compatible || ""}</div>
+        </div>
+        <div className={styles.compatibilityBox}>
+          <div>안 맞는 슝슝이</div>
+          <Image
+            src={incompatibleImagePath}
+            alt="안 맞는 슝슝이"
+            width={119}
+            height={185}
+            quality={100}
+          />
+          <div>{compatibilityData[MBTI]?.incompatible || ""}</div>
+        </div>
       </div>
-      <button onClick={() => navigator.clipboard.writeText(window.location.href)}>
-        결과 공유하기
-      </button>
-      <button onClick={() => router.push("/")}>테스트 다시하기</button>
+
+      <div className={styles.buttonContainer}>
+        <div className={styles.caption}>친구에게 공유하기</div>
+        <div className={styles.sharedBtn} onClick={handleCopyLink}>
+          <Link_IC />
+        </div>
+        <button className={styles.reButton} onClick={() => router.push("/")}>
+          테스트 다시하기
+        </button>
+      </div>
     </div>
   );
 };

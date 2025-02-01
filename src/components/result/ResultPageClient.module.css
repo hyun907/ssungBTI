@@ -1,0 +1,143 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #006e92;
+  text-align: center;
+  padding: 2rem;
+}
+
+.resultTitle {
+  color: #fff;
+  text-align: center;
+  font-family: "SBAggroM";
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 4rem;
+}
+
+.caption {
+  color: #fff;
+  text-align: center;
+  font-family: "SBAggroL";
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 2rem;
+}
+
+.mbtiImage {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 393px;
+  height: auto;
+}
+
+.compatibilityContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 2rem;
+  font-size: 1.4rem;
+  color: #222;
+  text-align: center;
+  font-family: "SBAggroM";
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.compatibilityBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 178px;
+  height: 280px;
+  border-radius: 33px;
+  border: 3px solid #222;
+  background: #fff;
+  padding: 5rem 0;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #222;
+  font-family: SBAggroM;
+}
+
+.reButton {
+  margin-top: 7rem;
+  margin-bottom: 2rem;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-family: "SBAggroM";
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  position: relative;
+  cursor: pointer;
+}
+
+.reButton::after {
+  width: 147px;
+  height: 3px;
+  background-color: #fff;
+  content: "";
+  position: absolute;
+  left: -3%;
+  top: 100%;
+}
+
+.sharedBtn {
+  width: 65px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 300%;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 110, 146, 0.2);
+  border-top-color: #006e92;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
