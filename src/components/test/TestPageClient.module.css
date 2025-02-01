@@ -127,11 +127,18 @@
 
 .choiceContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   gap: 2rem;
   margin-top: 6rem;
+  height: 100px;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.choiceContainer.fadeOut {
+  opacity: 0;
 }
 
 .choiceButton {

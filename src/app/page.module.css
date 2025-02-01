@@ -44,7 +44,7 @@
 .glassContainer {
   z-index: 2;
   display: flex;
-  margin-top: 2rem;
+  margin-top: 1rem;
   width: 31.9rem;
   height: 48rem;
   flex-direction: column;
