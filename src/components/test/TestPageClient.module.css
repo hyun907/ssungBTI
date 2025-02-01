@@ -78,10 +78,6 @@
   transition: all 0.2s ease-in-out;
 }
 
-.button:hover {
-  background: #005577;
-}
-
 .button:disabled {
   background: transparent;
   border: 2px solid #ccc;
@@ -133,11 +129,12 @@
   gap: 2rem;
   margin-top: 19rem;
 }
+
 .choiceButton {
   cursor: pointer;
   background-color: rgba(238, 252, 255, 0.7);
   width: 32rem;
-  height: 6.4rem;
+  min-height: 6.4rem;
   padding: 0.5rem 2rem;
   color: #222;
   text-align: center;
@@ -149,13 +146,6 @@
   border-radius: 20px;
   z-index: 1;
   transition: all 0.2s ease-in-out;
-}
-
-.choiceButton:hover {
-  background-color: rgba(59, 185, 223, 0.9);
-  border: 2px solid #3bb9df;
-  color: white;
-  transform: scale(1.05);
 }
 
 .choiceButton:active {
