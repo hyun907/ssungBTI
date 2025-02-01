@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./reset.css";
 import "./globals.css";
 import Recoil from "../context/RecoilContext";
+import GoogleAnalytics from "@/lib/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: "나만의 슝슝이를 찾아보슝!",
@@ -46,6 +47,9 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
       </head>
       <body>
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+        ) : null}
         <Recoil>{children}</Recoil>
       </body>
     </html>
