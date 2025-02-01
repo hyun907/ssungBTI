@@ -12,8 +12,8 @@ import Image from "next/image";
 const TestPageClient = () => {
   const router = useRouter();
   const [count, setCount] = useState(1);
-  const [forceRender, setForceRender] = useState(0); // 강제 리렌더링
   const [isLoading, setIsLoading] = useState(false);
+  const [forceRender, setForceRender] = useState(0);
   const [EI, setEI] = useRecoilState(EIState);
   const [SN, setSN] = useRecoilState(SNState);
   const [TF, setTF] = useRecoilState(TFState);
@@ -23,6 +23,10 @@ const TestPageClient = () => {
 
   const [history, setHistory] = useState<number[]>([]);
   const progress = (count / 12) * 100;
+
+  useEffect(() => {
+    setForceRender(prev => prev + 1);
+  }, [count]);
 
   // MBTI 계산
   const calculateMBTI = () => {
@@ -51,7 +55,6 @@ const TestPageClient = () => {
       }, 2000);
     } else {
       setCount(count + 1);
-      setForceRender(prev => prev + 1); // 강제 리렌더링
     }
   };
 
@@ -67,7 +70,6 @@ const TestPageClient = () => {
         else if (count <= 12) setJP(JP - (lastChoice === 1 ? 1 : -1));
       }
       setCount(count - 1);
-      setForceRender(prev => prev + 1); // 강제 리렌더링
     }
   };
 
@@ -109,6 +111,7 @@ const TestPageClient = () => {
                 </div>
               </div>
               <div className={styles.qMark}>Q</div>
+              {/* ✅ key={forceRender} 추가하여 강제 리렌더링 */}
               <h3 key={forceRender} className={styles.question}>
                 {mbtiQuestions[count]?.ques}
               </h3>
