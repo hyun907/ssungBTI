@@ -44,9 +44,9 @@
 .glassContainer {
   z-index: 2;
   display: flex;
-  margin-top: 6rem;
+  margin-top: 2rem;
   width: 31.9rem;
-  height: 51.8rem;
+  height: 48rem;
   flex-direction: column;
   align-items: center;
   border-radius: 30px;
@@ -55,6 +55,7 @@
   backdrop-filter: blur(20.5px);
   -webkit-backdrop-filter: blur(20.5px);
   position: relative;
+  overflow: hidden;
 }
 
 .title {
@@ -81,14 +82,14 @@
 }
 
 .imgWrapper {
-  margin-top: 1.8rem;
+  margin-top: -2rem;
 }
 
 .btnWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 4.4rem;
+  margin-top: 3rem;
 }
 
 .btn {
@@ -109,11 +110,11 @@
   font-style: normal;
   font-weight: 800;
   line-height: 4.5rem;
-  margin-bottom: 5.2rem;
+  margin-bottom: 1rem;
   cursor: pointer;
 }
 
 .btn:active {
-  background: #005577; 
-  transform: scale(0.98); 
+  background: #005577;
+  transform: scale(0.98);
 }

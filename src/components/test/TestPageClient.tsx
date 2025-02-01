@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { EIState, SNState, TFState, JPState, MBTIState, NameState } from "@/store/mbtiAtom";
@@ -19,7 +19,6 @@ const TestPageClient = () => {
   const [JP, setJP] = useRecoilState(JPState);
   const [MBTI, setMBTI] = useRecoilState(MBTIState);
   const [userName] = useRecoilState(NameState);
-  const currentQuestion = useMemo(() => mbtiQuestions[count], [count]);
 
   const [history, setHistory] = useState<number[]>([]);
   const progress = (count / 12) * 100;
@@ -131,7 +130,7 @@ const TestPageClient = () => {
                 </div>
               </div>
               <div className={styles.qMark}>Q</div>
-              <h3 className={styles.question}>{currentQuestion?.ques}</h3>
+              <h3 className={styles.question}>{mbtiQuestions[count]?.ques}</h3>
 
               <div className={styles.choiceContainer}>
                 <button className={styles.choiceButton} onClick={() => selectAnswer(1)}>
