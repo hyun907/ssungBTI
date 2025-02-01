@@ -99,6 +99,7 @@ const ResultPageClient = () => {
         alt={`${MBTI} 이미지`}
         quality={100}
         className={styles.mbtiImage}
+        priority={true}
       />
       <div className={styles.caption}>▲ 이미지 꾹 눌러서 저장하기</div>
       <div className={styles.compatibilityContainer}>
@@ -110,6 +111,7 @@ const ResultPageClient = () => {
             width={119}
             height={185}
             quality={100}
+            priority={true}
           />
           <div>{compatibilityData[MBTI]?.compatible || ""}</div>
         </div>
@@ -121,6 +123,7 @@ const ResultPageClient = () => {
             width={119}
             height={185}
             quality={100}
+            priority={true}
           />
           <div>{compatibilityData[MBTI]?.incompatible || ""}</div>
         </div>

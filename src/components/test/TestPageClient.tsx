@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { EIState, SNState, TFState, JPState, MBTIState, NameState } from "@/store/mbtiAtom";
@@ -19,6 +19,7 @@ const TestPageClient = () => {
   const [JP, setJP] = useRecoilState(JPState);
   const [MBTI, setMBTI] = useRecoilState(MBTIState);
   const [userName] = useRecoilState(NameState);
+  const currentQuestion = useMemo(() => mbtiQuestions[count], [count]);
 
   const [history, setHistory] = useState<number[]>([]);
   const progress = (count / 12) * 100;
@@ -71,16 +72,40 @@ const TestPageClient = () => {
   return (
     <>
       <div className={styles.bgImage1}>
-        <Image src="/images/pressu-logo.png" alt="배경 사진" width={268} height={288.13} />
+        <Image
+          src="/images/pressu-logo.png"
+          alt="배경 사진"
+          width={268}
+          height={288.13}
+          priority={true}
+        />
       </div>
       <div className={styles.container}>
         <div className={styles.mobileContainer}>
           {isLoading ? (
             <div className={styles.loadingScreen}>
               <div className={styles.loadingImg}>
-                <Image src="/images/loading1.png" alt="로딩 중" width={117} height={94} />
-                <Image src="/images/loading2.png" alt="로딩 중" width={117} height={94} />
-                <Image src="/images/loading3.png" alt="로딩 중" width={117} height={94} />
+                <Image
+                  src="/images/loading1.png"
+                  alt="로딩 중"
+                  width={117}
+                  height={94}
+                  priority={true}
+                />
+                <Image
+                  src="/images/loading2.png"
+                  alt="로딩 중"
+                  width={117}
+                  height={94}
+                  priority={true}
+                />
+                <Image
+                  src="/images/loading3.png"
+                  alt="로딩 중"
+                  width={117}
+                  height={94}
+                  priority={true}
+                />
               </div>
               <div className={styles.loadingText}>당신의 슝슝이를 찾고있슝...</div>
             </div>
@@ -106,7 +131,7 @@ const TestPageClient = () => {
                 </div>
               </div>
               <div className={styles.qMark}>Q</div>
-              <h3 className={styles.question}>{mbtiQuestions[count]?.ques}</h3>
+              <h3 className={styles.question}>{currentQuestion?.ques}</h3>
 
               <div className={styles.choiceContainer}>
                 <button className={styles.choiceButton} onClick={() => selectAnswer(1)}>

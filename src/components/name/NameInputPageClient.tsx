@@ -31,10 +31,22 @@ const NameInputPage = () => {
   return (
     <>
       <div className={styles.bgImage1}>
-        <Image src="/images/pressu-logo.png" alt="배경 사진" width={268} height={288.13} />
+        <Image
+          src="/images/pressu-logo.png"
+          alt="배경 사진"
+          width={268}
+          height={288.13}
+          priority={true}
+        />
       </div>
       <div className={styles.bgImage2}>
-        <Image src="/images/pressu-logo.png" alt="배경 사진" width={268} height={288.13} />
+        <Image
+          src="/images/pressu-logo.png"
+          alt="배경 사진"
+          width={268}
+          height={288.13}
+          priority={true}
+        />
       </div>
       <div className={styles.pageContainer}>
         <div className={styles.page}>

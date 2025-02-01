@@ -26,7 +26,7 @@
   display: flex;
   width: 100%;
   max-width: 320px;
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 
 .backBtn {
@@ -37,6 +37,7 @@
   background: transparent;
   border: none;
   font-family: NanumSquareAcR;
+  color: #222;
 }
 
 .qMark {
@@ -84,11 +85,12 @@
   color: #ccc;
   cursor: not-allowed;
 }
+
 .progressWrapper {
   position: relative;
   width: 100%;
   max-width: 320px;
-  margin-top: 10rem;
+  margin-top: 7rem;
 }
 
 .progressContainer {
@@ -125,9 +127,11 @@
 
 .choiceContainer {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   gap: 2rem;
-  margin-top: 19rem;
+  margin-top: 6rem;
 }
 
 .choiceButton {

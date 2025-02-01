@@ -16,7 +16,9 @@
   font-size: 2rem;
   font-style: normal;
   font-weight: 400;
-  margin-top: 4rem;
+  margin-top: 0.4rem;
+  margin-bottom: -3rem;
+  z-index: 1;
 }
 
 .caption {
@@ -30,7 +32,6 @@
 }
 
 .mbtiImage {
-  margin-top: 2rem;
   width: 100%;
   max-width: 393px;
   height: auto;
@@ -40,7 +41,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1rem;
   margin-top: 2rem;
   font-size: 1.4rem;
   color: #222;
@@ -56,7 +57,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 178px;
+  width: 163px;
   height: 280px;
   border-radius: 33px;
   border: 3px solid #222;
