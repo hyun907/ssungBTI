@@ -10,6 +10,25 @@ import Link_IC from "@/../public/svg/link.svg";
 import { Toaster, toast } from "react-hot-toast";
 import styles from "./ResultPageClient.module.css";
 
+const mbtiBackgroundColors: { [key: string]: string } = {
+  ENFP: "#FF318B",
+  ENFJ: "#FF786B",
+  ENTP: "#FFAC00",
+  ENTJ: "#6A286E",
+  ESFP: "#00918E",
+  ESFJ: "#966828",
+  ESTP: "#D32C00",
+  ESTJ: "#262F7B",
+  INFP: "#1B4396",
+  INFJ: "#3BB9DF",
+  INTP: "#89E7C9",
+  INTJ: "#000000",
+  ISFP: "#FFE972",
+  ISFJ: "#E3B6FF",
+  ISTP: "#5BC267",
+  ISTJ: "#4000F7"
+};
+
 const ResultPageClient = () => {
   const [MBTI, setMBTI] = useRecoilState(MBTIState);
   const [userName, setUserName] = useRecoilState(NameState);
@@ -43,6 +62,7 @@ const ResultPageClient = () => {
     );
   }
 
+  const backgroundColor = mbtiBackgroundColors[MBTI] || "#FFFFFF";
   const mbtiImagePath = `/images/mbti/${MBTI}.png`;
   const compatibleImagePath = `/images/mbtiAssets/${compatibilityData[MBTI]?.compatible || ""}.png`;
   const incompatibleImagePath = `/images/mbtiAssets/${compatibilityData[MBTI]?.incompatible || ""}.png`;
@@ -65,7 +85,10 @@ const ResultPageClient = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      style={{ backgroundColor, transition: "background 0.5s ease-in-out" }}
+    >
       <Toaster position="top-center" reverseOrder={false} />
 
       <h2 className={styles.resultTitle}>{userName}의 슝슝이는...</h2>
