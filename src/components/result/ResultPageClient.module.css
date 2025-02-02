@@ -100,6 +100,9 @@
   font-weight: 400;
   position: relative;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .reButton::after {
@@ -108,7 +111,6 @@
   background-color: #fff;
   content: "";
   position: absolute;
-  left: -3%;
   top: 100%;
 }
 
