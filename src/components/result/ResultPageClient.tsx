@@ -30,37 +30,38 @@ const mbtiBackgroundColors: { [key: string]: string } = {
 };
 
 const ResultPageClient = () => {
+  
   const [MBTI, setMBTI] = useRecoilState(MBTIState);
   const [userName, setUserName] = useRecoilState(NameState);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-
+  
   useEffect(() => {
+    const validMBTIs = Object.keys(mbtiBackgroundColors);
+  
+    // 클라이언트 환경 확인
     if (typeof window !== "undefined") {
       const savedMBTI = localStorage.getItem("MBTIState");
-      if (savedMBTI) {
-        setMBTI(savedMBTI);
-      }
-
       const storedName = localStorage.getItem("NameState");
+  
+      // 저장된 MBTI가 유효한 MBTI인지 체크
+      if (savedMBTI && validMBTIs.includes(savedMBTI)) {
+        setMBTI(savedMBTI);
+      } else {
+        // 유효하지 않은 MBTI일 경우 예외 처리
+        router.replace("/error"); // 혹은 home(`/`)으로 보내기
+        return;
+      }
+  
       if (storedName) {
         setUserName(storedName);
       }
     }
-
+  
     if (MBTI) {
       setIsLoading(false);
     }
-  }, [MBTI, setMBTI, setUserName]);
-
-  if (isLoading) {
-    return (
-      <div className={styles.loadingContainer}>
-        <div className={styles.spinner}></div>
-        <p>로딩 중...</p>
-      </div>
-    );
-  }
+  }, [MBTI, setMBTI, setUserName, router]);  
 
   const backgroundColor = mbtiBackgroundColors[MBTI] || "#FFFFFF";
   const mbtiImagePath = `/images/mbti/${MBTI}.png`;
@@ -83,6 +84,15 @@ const ResultPageClient = () => {
       }
     });
   };
+
+  if (isLoading || !MBTI) {
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.spinner}></div>
+        <p>로딩 중...</p>
+      </div>
+    );
+  }
 
   return (
     <div
